@@ -4,3 +4,5 @@ zabbix:
   server: 10.250.10.30 # zabbix server we're using
   port: 10051 # zabbix port
   interval: 10 # interval between sending updates to server
+  host: FaceID # how to impersonate host at zabbix
+  key: FaceID.Terminals.Info # key to send value to

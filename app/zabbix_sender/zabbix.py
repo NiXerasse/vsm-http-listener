@@ -9,19 +9,22 @@ class ZabbixSender:
         self.server = None
         self.interval = None
         self.port = None
+        self.host = None
+        self.key = None
 
     def setup(self, app: web.Application):
         self.db = app["db"].db
         self.server = ZbxSender(app["config"]["zabbix"]["server"], app["config"]["zabbix"]["port"])
         self.interval = app["config"]["zabbix"]["interval"]
+        self.host = app["config"]["zabbix"]["host"]
+        self.key = app["config"]["zabbix"]["key"]
 
     async def send_to_zabbix(self):
         while True:
             data = str(self.db)
             if data:
-                packet = [ZbxMetric('1602-NB', 'FaceID.Terminals.Info', data)]
-                self.server.send(packet)
+                packet = [ZbxMetric(self.host, self.key, data)]
                 print('---Sending to zabbix---')
-                print(data)
+                print(self.server.send(packet))
                 print('---Sent to zabbix!---')
             await asyncio.sleep(self.interval)
