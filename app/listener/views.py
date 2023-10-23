@@ -1,4 +1,5 @@
 from aiohttp import web
+from app.store.database.models import TerminalData
 import json
 
 
@@ -12,4 +13,5 @@ async def post(request: web.Request):
     terminal_name: str = json_data['AccessControllerEvent']['deviceName']
     terminal_mac: str = json_data['macAddress']
     terminal_ip: str = json_data['ipAddress']
-    print(f'Terminal: {terminal_name} -> {terminal_ip} ({terminal_mac})')
+    request.app["db"].db.add(TerminalData(terminal_name, terminal_ip, terminal_mac))
+    print(request.app["db"].db)
