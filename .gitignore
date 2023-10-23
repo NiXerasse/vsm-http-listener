@@ -4,5 +4,4 @@ app/listener/__pycache__
 app/__pycache__/
 app/store/__pycache__/
 app/store/database/__pycache__/
-app/store/database/inmemorydb.py
 app/zabbix_sender/__pycache__/
