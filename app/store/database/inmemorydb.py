@@ -13,6 +13,6 @@ class InmemoryDB:
 
     def __str__(self):
         return '\n'.join(
-            f'{terminal.name}: {terminal.ip} {terminal.mac}'
+            f'{terminal.name.ljust(20, " ")}{terminal.ip.rjust(15, " ")}    {terminal.mac}'
             for terminal in sorted(self.db.values(), key=lambda d: d.name)
         )
