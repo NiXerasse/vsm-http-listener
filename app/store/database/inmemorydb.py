@@ -1,3 +1,4 @@
+import logging
 import typing
 
 if typing.TYPE_CHECKING:
@@ -9,6 +10,11 @@ class InmemoryDB:
         self.db = {}
 
     def add(self, data: "TerminalData"):
+        if data.ip in self.db:
+            if self.db[data.ip].name != data.name or self.db[data.ip].mac != data.mac:
+                logging.info(f'Updated terminal: {data.name} {data.ip} {data.mac}')
+        else:
+            logging.info(f'Added terminal: {data.name} {data.ip} {data.mac}')
         self.db[data.ip] = data
 
     def __str__(self):
