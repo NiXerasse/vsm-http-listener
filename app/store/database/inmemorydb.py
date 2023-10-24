@@ -26,4 +26,4 @@ class InmemoryDB:
         return '\n'.join(
             f'{terminal.name.ljust(20, " ")}{terminal.ip.rjust(15, " ")}    {terminal.mac}'
             for terminal in sorted(self.db.values(), key=lambda d: d.name)
-        ) + '\n' + f'Total number of terminals: {len(self.db)}'.rjust(56, ' ')
+        ) + '\n' + '-' * 56 + '\n' + f'Total number of terminals: {len(self.db)}'.rjust(56, ' ')
