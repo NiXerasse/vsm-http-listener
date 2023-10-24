@@ -1,8 +1,12 @@
 import asyncio
 import logging
+import sys
 
 from aiohttp import web
 from pyzabbix import ZabbixSender as ZbxSender, ZabbixMetric as ZbxMetric
+
+
+logger = logging.getLogger(__name__)
 
 
 class ZabbixSender:
@@ -26,7 +30,5 @@ class ZabbixSender:
             data = str(self.db)
             if data:
                 packet = [ZbxMetric(self.host, self.key, data)]
-                logging.info('---Sending to zabbix---')
-                logging.info(self.server.send(packet))
-                logging.info('---Sent to zabbix!---')
+                logger.info(self.server.send(packet))
             await asyncio.sleep(self.interval)
