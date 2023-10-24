@@ -9,7 +9,7 @@ class InmemoryDB:
         self.db = {}
 
     def add(self, data: "TerminalData"):
-        self.db[data.name] = data
+        self.db[data.ip] = data
 
     def __str__(self):
         return '\n'.join(
