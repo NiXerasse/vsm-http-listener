@@ -1,5 +1,6 @@
 services:
   web:
+    container_name: vsm-http-listener
     build: app
     ports:
       - "8080:8080"
